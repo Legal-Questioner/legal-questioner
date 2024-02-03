@@ -41,8 +41,8 @@ public class DatabaseInitializerRunner implements ApplicationRunner {
           hash VARCHAR(32) NOT NULL
         );
 
-        CREATE INDEX idx_documents_search_vector ON documents USING gin(search_vector);
-        CREATE INDEX idx_document_contexts_search_vector ON document_contexts USING gin(search_vector);
+        CREATE INDEX IF NOT EXISTS idx_documents_search_vector ON documents USING gin(search_vector);
+        CREATE INDEX IF NOT EXISTS idx_document_contexts_search_vector ON document_contexts USING gin(search_vector);
         """));
   }
 }
