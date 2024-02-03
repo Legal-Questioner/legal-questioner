@@ -23,7 +23,7 @@ public class DatabaseInitializerRunner implements ApplicationRunner {
           id  UUID PRIMARY KEY,
           name VARCHAR(36) NOT NULL,
           contents TEXT NOT NULL,
-          search_vector ts_vector
+          search_vector tsvector
         );
 
         CREATE TABLE IF NOT EXISTS document_contexts(
@@ -31,11 +31,11 @@ public class DatabaseInitializerRunner implements ApplicationRunner {
           document_id UUID REFERENCES documents(id) ON DELETE CASCADE,
           question TEXT NOT NULL,
           response TEXT NOT NULL,
-          search_vector ts_vector
+          search_vector tsvector
         );
 
         CREATE TABLE IF NOT EXISTS document_metadata(
-          id SERIAL PRIMARY KEY
+          id SERIAL PRIMARY KEY,
           document_id UUID REFERENCES documents(id) ON DELETE CASCADE,
           fileName VARCHAR(36) NOT NULL,
           hash VARCHAR(32) NOT NULL
