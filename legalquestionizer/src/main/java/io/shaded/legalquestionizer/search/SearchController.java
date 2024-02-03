@@ -18,7 +18,7 @@ public class SearchController {
 
   @GetMapping
   public ResponseEntity<SearchResponse> searchDocuments(@RequestParam(required = false) String type, @RequestBody SearchRequest request) {
-    return switch (type.toLowerCase()) {
+    return switch (type != null ? type.toLowerCase() : "") {
       case "contexts" -> ResponseEntity.ok(new SearchResponse(SearchResponse.Type.CONTEXT, this.searchService.searchContexts(request.input())));
       case "documents" -> ResponseEntity.ok(new SearchResponse(SearchResponse.Type.DOCUMENT, this.searchService.searchDocuments(request.input())));
       default ->  ResponseEntity.ok(new SearchResponse(SearchResponse.Type.ALL,
