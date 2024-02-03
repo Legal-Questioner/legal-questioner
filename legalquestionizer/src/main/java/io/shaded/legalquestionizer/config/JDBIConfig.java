@@ -34,7 +34,7 @@ public class JDBIConfig {
     return DataSourceBuilder
       .create()
       .type(HikariDataSource.class)
-      .url("localhost")
+      .url("jdbc:postgresql://localhost:5432/legal")
       .username("legal")
       .password("legal")
       .build();
