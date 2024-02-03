@@ -1,6 +1,7 @@
 package io.shaded.legalquestionizer.search;
 
 import org.jdbi.v3.core.Jdbi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.UUID;
 public class SearchService {
   private final Jdbi jdbi;
 
+  @Autowired
   public SearchService(Jdbi jdbi) {
     this.jdbi = jdbi;
   }
