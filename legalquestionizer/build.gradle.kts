@@ -32,6 +32,7 @@ dependencies {
   implementation("com.zaxxer:HikariCP:5.1.0")
 
   implementation("com.google.cloud:google-cloud-vertexai:0.1.0")
+  implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 }
 
 tasks.withType<Test> {
