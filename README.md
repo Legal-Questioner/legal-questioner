@@ -27,10 +27,10 @@ The `.env` file should take the format
 
 Make sure you have the google cloud SDK installed. Run
 ```sh
-gcloud config set project {PROJECT_ID} && gcloud auth login {ACCOUNT}
+gcloud config set project {PROJECT_ID} && gcloud auth login
 ```
 Replacing `PROJECT_ID` with the project id (this will be same as the java environment variable) and `ACCOUNT` with the gmail account you use to access the GCP console. 
 
 ### Launching the server
 
-Begin the persistent server with `./legalquestionizer/gradlew bootRun` in a terminal.
+Begin the persistent server with `cd ./legalquestionizer && ./gradlew bootRun` in a terminal.
