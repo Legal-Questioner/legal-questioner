@@ -22,7 +22,7 @@ public class DocumentService {
     this.jdbi.withHandle(handle -> handle.createUpdate(
         """
               INSERT INTO documents (id, name, contents, search_vector)
-              VALUES (:id, :name, :contents, to_tsvector(:contents))
+              VALUES (:id, :name, :contents, to_tsvector('english', coalesce(:name, '') || ' ' || coalesce(:contents, '')))
           """)
       .bind("id", document.id())
       .bind("name", document.name())

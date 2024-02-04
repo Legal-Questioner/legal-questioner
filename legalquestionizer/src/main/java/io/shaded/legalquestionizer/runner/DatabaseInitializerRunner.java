@@ -19,6 +19,8 @@ public class DatabaseInitializerRunner implements ApplicationRunner {
   public void run(ApplicationArguments args) {
     jdbi.useTransaction(handle -> handle.execute(
       """
+        CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
         CREATE TABLE IF NOT EXISTS documents(
           id  UUID PRIMARY KEY,
           name VARCHAR(36) NOT NULL,
