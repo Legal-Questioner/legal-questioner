@@ -26,9 +26,14 @@ function App() {
 
     const response = await axios.post('http://localhost:3000/api/query', { question: question, contents: contents });
 
-    console.log(response);
+    const respString = response.data.summary;
+    console.log(respString);
 
-    setGeminiReponse(response.summary);
+    const startIndex = respString.indexOf('text: "');
+    const endIndex = respString.indexOf('finish_reason:');
+
+    console.log(startIndex, endIndex);
+    setGeminiReponse(respString.substring(startIndex+7, endIndex-14));
   }
 
   useEffect(() => {
@@ -65,13 +70,15 @@ function App() {
           </button>
         </div>
 
-        <div>
-          {geminiResponse}
+        <p className='header mt-10'>Response</p>
+        <div className="font-serif mt-4 px-32">
+          {geminiResponse ? geminiResponse : "Your answer will be shown here!"}
         </div>
 
-        <div>
-          {searchLinks[0]}
-        </div>
+        <p className='font-serif mt-6 font-bold'>{geminiResponse ? "Sources" : ""}</p>
+        <a href={searchLinks[0]} target="_blank" rel="noreferrer" className="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+          {geminiResponse ? searchLinks[0] : ""}
+        </a>
 
       </header>
 
