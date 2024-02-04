@@ -1,5 +1,5 @@
 .App {
-  background: var(--colour-secondary-white-100-general, #FFF);
+  background: var(--colour-secondary-white-100-general, #E7ECFF);
 }
 
 .App-logo {
@@ -14,7 +14,6 @@
 }
 
 .Home {
-  background: var(--colour-secondary-white-100-general, #FFF);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,12 +26,10 @@
 
 .Search {
   text-align: center;
-  background: var(--colour-secondary-white-100-general, #FFF);
 }
 
 .About {
   text-align: center;
-  background: var(--colour-secondary-white-100-general, #FFF);
 }
 
 .header {
@@ -83,12 +80,16 @@
 }
 
 nav {
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #091133;
   text-align: left;
   position: fixed;
   top: 0;
   width: 100%;
   background: white;
+
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-style: normal;
 }
 
 nav ul {
@@ -105,13 +106,13 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: black;
+  color: #091133;
   font-weight: bold;
   padding: 24px 32px;
 }
 
 nav a:hover {
-  background: black;
+  background: #091133;
   color: white;
 }
 
@@ -122,12 +123,8 @@ nav a:hover {
 
 .nav-right {
   position: absolute;
-  top: 10px;
-  right: 8px;
+  top: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
-
-  font-family: 'sans-serif';
-  font-size: 20px;
-  font-style: normal;
 }

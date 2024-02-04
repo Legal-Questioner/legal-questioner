@@ -18,7 +18,7 @@ const NavBar = () => {
             </ul>
             <div className="nav-right">
 
-                <img src={logo} className='nav-icon' alt='Legal Questioner' />
+                <img src={logo} className='nav-icon mr-1' alt='Legal Questioner' />
                 Legal Questioner
             </div>
         </nav>
