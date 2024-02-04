@@ -1,8 +1,9 @@
 package io.shaded.legalquestionizer.context;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface ContextStrategy {
   String getSimplification(String question,
-                           String[] documentTexts) throws IOException;
+                           List<String> documentTexts) throws IOException;
 }

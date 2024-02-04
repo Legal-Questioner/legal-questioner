@@ -60,16 +60,17 @@ public class GoogleGeminiContextStrategy implements ContextStrategy {
 
   @Override
   public String getSimplification(String question,
-                                  String[] documentTexts) throws IOException {
+                                  List<String> documentTexts) throws IOException {
     final String query = formatToGeminiQuery(question, documentTexts);
     return model.generateContent(query).toString();
   }
 
-  private String formatToGeminiQuery(String question, String[] documentTexts) {
+  private String formatToGeminiQuery(String question,
+                                     List<String> documentTexts) {
     final String findWhitespaceRegex = "[\\r\\n]+";
 
     String formattedDocumentTexts = StringUtils
-      .join(List.of(documentTexts), ' ')
+      .join(documentTexts, ' ')
       .replaceAll(findWhitespaceRegex, " ");
     formattedDocumentTexts = formattedDocumentTexts
       .substring(0, Math.min(formattedDocumentTexts.length(),
