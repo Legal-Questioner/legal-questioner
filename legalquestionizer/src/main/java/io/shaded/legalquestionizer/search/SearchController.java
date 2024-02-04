@@ -2,7 +2,7 @@ package io.shaded.legalquestionizer.search;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +16,7 @@ public class SearchController {
     this.searchService = searchService;
   }
 
-  @GetMapping
+  @PostMapping
   public ResponseEntity<SearchResponse> searchDocuments(@RequestParam(required = false) String type, @RequestBody SearchRequest request) {
     return switch (type != null ? type.toLowerCase() : "") {
       case "contexts" -> ResponseEntity.ok(new SearchResponse(SearchResponse.Type.CONTEXT, this.searchService.searchContexts(request.input())));
