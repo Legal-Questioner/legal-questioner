@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/search")
@@ -17,12 +18,10 @@ public class SearchController {
   }
 
   @PostMapping
-  public ResponseEntity<SearchResponse> searchDocuments(@RequestParam(required = false) String type, @RequestBody SearchRequest request) {
-    return switch (type != null ? type.toLowerCase() : "") {
-      case "contexts" -> ResponseEntity.ok(new SearchResponse(SearchResponse.Type.CONTEXT, this.searchService.searchContexts(request.input())));
-      case "documents" -> ResponseEntity.ok(new SearchResponse(SearchResponse.Type.DOCUMENT, this.searchService.searchDocuments(request.input())));
-      default ->  ResponseEntity.ok(new SearchResponse(SearchResponse.Type.ALL,
-        this.searchService.search(request.input())));
-    };
+  public ResponseEntity<SearchResponse> searchDocuments(@RequestBody SearchRequest request) {
+    List<String> links = searchService.search(request.input());
+    List<String> contents = searchService.searchForContents(request.input());
+
+    return ResponseEntity.ok(new SearchResponse(links, contents));
   }
 }
