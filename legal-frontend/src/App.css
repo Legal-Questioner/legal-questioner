@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: var(--colour-secondary-white-100-general, #FFF);
 }
 
 .App-logo {
@@ -14,18 +15,67 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--Colour-Main-Blue-900, #091133);
+  font-feature-settings: 'clig' off, 'liga' off;
+  
+  /* Medium 50 */
+  font-family: Roboto;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 66px; /* 132% */
+  letter-spacing: 1px;
+}
+
+.App-search {
+  color: var(--Colour-Main-Blue-900, #091133);
+  font-feature-settings: 'clig' off, 'liga' off;
+  
+  /* Medium 50 */
+  font-family: Roboto;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 66px; /* 132% */
+  letter-spacing: 1px;
+}
+
+.App-about {
+  color: var(--Colour-Main-Blue-900, #091133);
+  font-feature-settings: 'clig' off, 'liga' off;
+  
+  /* Medium 50 */
+  font-family: Roboto;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 66px; /* 132% */
+  letter-spacing: 1px;
+}
+
+.App-body {
+  color: var(--Colour-Main-Blue-500, #505F98);
+  font-feature-settings: 'clig' off, 'liga' off;
+
+  /* Regular 18 */
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px; /* 166.667% */
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.App-blob {
+  width: 1490.032px;
+  height: 1161px;
+  flex-shrink: 0;
+
+  fill: var(--Colour-Main-Blue-100, #E7ECFF);
+  opacity: 0.5;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +85,54 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+nav {
+  border-bottom: 4px solid black;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 24px 32px;
+}
+
+nav a:hover {
+  background: black;
+  color: white;
+}
+
+.nav-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.nav-right {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+
+  font-family: 'sans-serif';
+  font-size: 20px;
+  font-style: normal;
 }
