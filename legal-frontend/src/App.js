@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
 import homeDesign from './images/HomeDesign.svg';
@@ -8,11 +8,35 @@ import AboutSection from "./components/AboutSection.js";
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
+  const [searchLinks, setSearchLinks] = useState("");
+  const [searchContents, setsearchContents] = useState("");
+  const [geminiResponse, setGeminiReponse] = useState("");
 
   const loadSearchResults = async ({ searchInput }) => {
-    const response = await axios.post('http://localhost:3000/api/search', { body: { "input": searchInput } });
+    const response = await axios.post('http://localhost:3000/api/search', { input: searchInput });
     console.log(response);
+
+    setSearchLinks(response.data.documentsLinks);
+    setsearchContents(response.data.contents);
   }
+
+  const querySearchResults = async ({ question , contents }) => {
+    console.log(question);
+    console.log(contents);
+
+    const response = await axios.post('http://localhost:3000/api/query', { question: question, contents: contents });
+
+    console.log(response);
+
+    setGeminiReponse(response.summary);
+  }
+
+  useEffect(() => {
+    if (searchContents !== "") {
+      // Trigger querySearchResults when searchContents is updated
+      querySearchResults({ question: searchInput, contents: searchContents });
+    }
+  }, [searchContents, searchInput]);
 
   return (
     <div className="App">
@@ -36,10 +60,19 @@ function App() {
 
         <div className="my-10">
           <button className="bg-transparent hover:bg-slate-900 text-slate-950 font-serif hover:text-white py-2 px-4 border border-slate-950"
-            onClick={loadSearchResults}>
+            onClick={() => loadSearchResults({ searchInput }) }>
             Search!
           </button>
         </div>
+
+        <div>
+          {geminiResponse}
+        </div>
+
+        <div>
+          {searchLinks[0]}
+        </div>
+
       </header>
 
       <header id="About" className='About'>
