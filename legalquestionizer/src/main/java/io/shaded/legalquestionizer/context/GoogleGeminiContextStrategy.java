@@ -16,12 +16,11 @@ public class GoogleGeminiContextStrategy implements ContextStrategy {
   private final int queryCharLimit;
   private final String location;
   private final String projectId;
+  final String modelName = "gemini-pro";
+  final String defaultLocation = "us-central1";
+  final int defaultCharLimit = 30000;
 
   public GoogleGeminiContextStrategy() throws IOException {
-    final int defaultCharLimit = 30000;
-    final String defaultLocation = "us-central1";
-
-    model = launchGemini();
     dotenv = Dotenv.load();
     queryCharLimit = dotenvAsInt("GEMINI_CHAR_LIMIT", defaultCharLimit);
     location = dotenvAsString("LOCATION", defaultLocation);
@@ -30,11 +29,11 @@ public class GoogleGeminiContextStrategy implements ContextStrategy {
     if (projectId == null) {
       throw new NullPointerException();
     }
+
+    model = launchGemini();
   }
 
   private GenerativeModel launchGemini() throws IOException {
-    final String modelName = "gemini-pro";
-
     try (VertexAI vertexAI = new VertexAI(projectId, location)) {
       return new GenerativeModel(modelName, vertexAI);
     }
@@ -63,6 +62,15 @@ public class GoogleGeminiContextStrategy implements ContextStrategy {
                                   List<String> documentTexts) throws IOException {
     final String query = formatToGeminiQuery(question, documentTexts);
     return model.generateContent(query).toString();
+    // Initialize client that will be used to send requests. This client only needs
+    // to be created once, and can be reused for multiple requests.
+//    try (VertexAI vertexAI = new VertexAI(projectId, location)) {
+//      GenerativeModel model = new GenerativeModel(modelName, vertexAI);
+//      GenerateContentResponse response = model.generateContent("Tell me a " +
+//                                                               "joke.");
+//      return response.toString();
+//    }
+
   }
 
   private String formatToGeminiQuery(String question,
@@ -77,6 +85,6 @@ public class GoogleGeminiContextStrategy implements ContextStrategy {
         queryCharLimit));
 
     return String.format("answer the question %s by summarizing the " +
-      "following text: %s", question, formattedDocumentTexts);
+                         "following text: %s", question, formattedDocumentTexts);
   }
 }
