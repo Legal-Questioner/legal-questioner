@@ -62,15 +62,6 @@ public class GoogleGeminiContextStrategy implements ContextStrategy {
                                   List<String> documentTexts) throws IOException {
     final String query = formatToGeminiQuery(question, documentTexts);
     return model.generateContent(query).toString();
-    // Initialize client that will be used to send requests. This client only needs
-    // to be created once, and can be reused for multiple requests.
-//    try (VertexAI vertexAI = new VertexAI(projectId, location)) {
-//      GenerativeModel model = new GenerativeModel(modelName, vertexAI);
-//      GenerateContentResponse response = model.generateContent("Tell me a " +
-//                                                               "joke.");
-//      return response.toString();
-//    }
-
   }
 
   private String formatToGeminiQuery(String question,
