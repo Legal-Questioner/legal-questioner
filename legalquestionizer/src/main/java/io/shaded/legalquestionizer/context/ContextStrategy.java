@@ -1,8 +1,8 @@
 package io.shaded.legalquestionizer.context;
 
-import org.jetbrains.annotations.NotNull;
+import java.io.IOException;
 
 public interface ContextStrategy {
-  String getSimplification(@NotNull String question,
-                                  @NotNull String[] documentTexts);
+  String getSimplification(String question,
+                           String[] documentTexts) throws IOException;
 }

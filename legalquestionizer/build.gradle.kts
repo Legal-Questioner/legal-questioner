@@ -1,9 +1,7 @@
 plugins {
-	java
-	id("org.springframework.boot") version "3.2.2"
-	id("io.spring.dependency-management") version "1.1.4"
-  kotlin("jvm") version "1.9.22"
-  kotlin("plugin.spring") version "1.9.22"
+  java
+  id("org.springframework.boot") version "3.2.2"
+  id("io.spring.dependency-management") version "1.1.4"
 }
 
 group = "io.shaded"
@@ -18,9 +16,6 @@ repositories {
 }
 
 dependencies {
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-
   implementation("org.springframework.boot:spring-boot-starter-web")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -32,7 +27,7 @@ dependencies {
   implementation("com.zaxxer:HikariCP:5.1.0")
 
   implementation("com.google.cloud:google-cloud-vertexai:0.1.0")
-  implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
+  implementation("io.github.cdimascio:dotenv-java:3.0.0")
 }
 
 tasks.withType<Test> {
