@@ -4,6 +4,7 @@ import './App.css';
 import homeDesign from './images/HomeDesign.svg';
 import NavBar from './components/NavBar.js';
 import SearchBar from './components/SearchBar.js';
+import AboutSection from "./components/AboutSection.js";
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
@@ -33,16 +34,20 @@ function App() {
 
         <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
 
-        <div className="mt-10">
-          <button className="bg-transparent hover:bg-slate-900 text-slate-950 font-serif hover:text-white py-2 px-4 border border-slate-950" 
+        <div className="my-10">
+          <button className="bg-transparent hover:bg-slate-900 text-slate-950 font-serif hover:text-white py-2 px-4 border border-slate-950"
             onClick={loadSearchResults}>
             Search!
           </button>
         </div>
-
       </header>
+
       <header id="About" className='About'>
 
+        <p className='header mt-40'>Our Story</p>
+        <div className="mt-10">
+          <AboutSection />
+        </div>
       </header>
     </div>
   );
