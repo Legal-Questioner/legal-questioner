@@ -16,16 +16,18 @@ public class DocumentService {
     this.jdbi = jdbi;
   }
 
-  public Document createDocument(String name, String contents) {
-    final Document document = new Document(UUID.randomUUID(), name, contents);
+  public Document createDocument(String name, String link, String contents) {
+    final Document document = new Document(UUID.randomUUID(), name,
+      link, contents);
 
     this.jdbi.withHandle(handle -> handle.createUpdate(
         """
-              INSERT INTO documents (id, name, contents, search_vector)
-              VALUES (:id, :name, :contents, to_tsvector('english', coalesce(:name, '') || ' ' || coalesce(:contents, '')))
+              INSERT INTO documents (id, name, link, contents, search_vector)
+              VALUES (:id, :name, :link, :contents, to_tsvector('english', coalesce(:name, '') || ' ' || coalesce(:contents, '')))
           """)
       .bind("id", document.id())
       .bind("name", document.name())
+      .bind("link", document.link())
       .bind("contents", document.contents())
       .execute());
 

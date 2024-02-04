@@ -19,7 +19,10 @@ public class DocumentController {
 
   @PostMapping
   public ResponseEntity<DocumentCreateResponse> createDocument(@RequestBody DocumentCreateRequest request) {
-    return ResponseEntity.ok(new DocumentCreateResponse(this.documentService.createDocument(request.name(), request.contents())));
+    Document document = documentService.createDocument(request.name(),
+      request.link(),
+      request.contents());
+    return ResponseEntity.ok(new DocumentCreateResponse(document));
   }
 
   @GetMapping("/name/{id}")
