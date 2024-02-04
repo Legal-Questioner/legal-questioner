@@ -4,7 +4,7 @@ Created for the GDSC Solutions Challenge 2024.
 
 ## Running the Website Frontend
 
-Make sure you have `npm`, `node` and `react-scripts` installed.
+Make sure you have `npm`, `node`, `react-scripts`, `axios`, and `tailwind-css` installed.
 
 Run the application by
 ```sh
