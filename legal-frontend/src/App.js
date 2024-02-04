@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
 import homeDesign from './images/HomeDesign.svg';
+// import icon from './images/LegalLogo.svg';
 import NavBar from './components/NavBar.js';
 import SearchBar from './components/SearchBar.js';
 import AboutSection from "./components/AboutSection.js";
@@ -33,7 +34,7 @@ function App() {
     const endIndex = respString.indexOf('finish_reason:');
 
     console.log(startIndex, endIndex);
-    setGeminiReponse(respString.substring(startIndex+7, endIndex-14));
+    setGeminiReponse(respString.substring(startIndex+7, endIndex-14).replace(/\\n/g, '').replace(/\\/g, ''));
   }
 
   useEffect(() => {
