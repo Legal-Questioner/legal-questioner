@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
 import homeDesign from './images/HomeDesign.svg';
-// import icon from './images/LegalLogo.svg';
+// import icon from './images/DualRing.svg';
 import NavBar from './components/NavBar.js';
 import SearchBar from './components/SearchBar.js';
 import AboutSection from "./components/AboutSection.js";
