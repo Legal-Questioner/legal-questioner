@@ -31,9 +31,9 @@ public class SearchService {
 
     return jdbi.withHandle(handle -> handle.createQuery
         ("""
-          SELECT id FROM documents WHERE search_vector @@ ts_query(:input)
+          SELECT id FROM documents WHERE search_vector @@ tsquery(:input)
           UNION
-          SELECT document_id FROM document_contexts WHERE search_vector @@ ts_query(:input)
+          SELECT document_id FROM document_contexts WHERE search_vector @@ tsquery(:input)
           """)
       .bind("input", input)
       .mapTo(UUID.class)
@@ -53,7 +53,7 @@ public class SearchService {
     }
 
     return jdbi.withHandle(handle -> handle.createQuery
-        ("SELECT id FROM documents WHERE search_vector @@ ts_query(:input)")
+        ("SELECT id FROM documents WHERE search_vector @@ tsquery(:input)")
       .bind("input", input)
       .mapTo(UUID.class)
       .list());
@@ -73,7 +73,7 @@ public class SearchService {
     }
 
     return jdbi.withHandle(handle -> handle.createQuery
-        ("SELECT document_id FROM document_contexts WHERE search_vector @@ ts_query(:input)")
+        ("SELECT document_id FROM document_contexts WHERE search_vector @@ tsquery(:input)")
       .bind("input", input)
       .mapTo(UUID.class)
       .list());
