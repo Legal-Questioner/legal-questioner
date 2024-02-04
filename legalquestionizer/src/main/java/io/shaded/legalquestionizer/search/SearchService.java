@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class SearchService {
@@ -17,13 +16,13 @@ public class SearchService {
   }
 
   /**
-   * Searches both the documents and contexts to obtain the closes documents
-   * for that input
+   * Searches both the documents and contexts to obtain the closest document's
+   * links for that input
    *
    * @param input The input string form the front end.
    * @return A list of documents that are similar to that input
    */
-  public List<UUID> search(String input) {
+  public List<String> search(String input) {
     // Handle the case of null input / empty string.
     if (input == null || input.isEmpty()) {
       return List.of();
@@ -31,30 +30,24 @@ public class SearchService {
 
     return jdbi.withHandle(handle -> handle.createQuery
         ("""
-          SELECT id FROM documents
+          SELECT link FROM documents
           WHERE search_vector @@ plainto_tsquery(:input)
           OR contents % :input
           OR name % :input
-          UNION
-          SELECT document_id
-          FROM document_contexts
-          WHERE search_vector @@ plainto_tsquery(:input)
-          OR question % :input
-          OR response % :input
-
           """)
       .bind("input", input)
-      .mapTo(UUID.class)
+      .mapTo(String.class)
       .list());
   }
 
   /**
-   * Searches documents to find the closes document with that input string.
+   * Searches both the documents and contexts to obtain the closes document's
+   * contents for that input
    *
    * @param input The input string form the front end.
    * @return A list of documents that are similar to that input
    */
-  public List<UUID> searchDocuments(String input) {
+  public List<String> searchForContents(String input) {
     // Handle the case of null input / empty string.
     if (input == null || input.isEmpty()) {
       return List.of();
@@ -62,35 +55,13 @@ public class SearchService {
 
     return jdbi.withHandle(handle -> handle.createQuery
         ("""
-          SELECT id FROM documents WHERE search_vector @@ plainto_tsquery(:input)
-          OR contents OR contents % :input
+          SELECT contents FROM documents
+          WHERE search_vector @@ plainto_tsquery(:input)
+          OR contents % :input
+          OR name % :input
           """)
       .bind("input", input)
-      .mapTo(UUID.class)
-      .list());
-  }
-
-  /**
-   * Searches the questions and responses search in the database for a
-   * matching document.
-   *
-   * @param input The input string from the front end
-   * @return A list of documents that are similar to that input
-   */
-  public List<UUID> searchContexts(String input) {
-    // Handle the case of null input / empty string.
-    if (input == null || input.isEmpty()) {
-      return List.of();
-    }
-
-    return jdbi.withHandle(handle -> handle.createQuery
-        ("""
-          SELECT document_id FROM document_contexts WHERE search_vector @@ tsquery(:input)
-          OR question % :input
-          OR response % :input
-          """)
-      .bind("input", input)
-      .mapTo(UUID.class)
+      .mapTo(String.class)
       .list());
   }
 }
